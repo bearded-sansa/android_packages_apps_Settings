@@ -4121,6 +4121,9 @@
     <string name="general_settings_title">General</string>
     <string name="profiles_settings_title">Profiles</string>
 
+    <!-- ParanoidAndroid settings intent -->
+    <string name="paranoid_settings">Paranoid Settings</string>    
+
     <!-- System Profiles -->
     <string name="profiles_general_title">General</string>
     <string name="profiles_add">Add</string>
@@ -5010,6 +5013,9 @@
     <string name="gpu_info">GPU</string>
     <string name="cpu_info">CPU</string>
     <string name="mem_info">Memory</string>
+	<string name="pa_version">ParanoidAndroid version</string>
+	<string name="build_date">Build date</string>
+    <string name="build_date_default">2012-01-01-0000</string>
 
     <!-- About Phone | Mod Version-->
     <string name="mod_version">Mod Version</string>
