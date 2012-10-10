@@ -5013,13 +5013,14 @@
     <string name="gpu_info">GPU</string>
     <string name="cpu_info">CPU</string>
     <string name="mem_info">Memory</string>
-	<string name="pa_version">ParanoidAndroid version</string>
-	<string name="build_date">Build date</string>
+    <string name="build_date">Build date</string>
     <string name="build_date_default">2012-01-01-0000</string>
 
     <!-- About Phone | Mod Version-->
     <string name="mod_version">Mod Version</string>
     <string name="mod_version_default">Unknown</string>
+    <string name="pa_version">ParanoidAndroid version</string>
+    <string name="ls_version">LiquidSmooth version</string>
     <string name="ok">OK</string>
 
     <!-- Color Picker -->
