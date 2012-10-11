@@ -502,6 +502,26 @@ public class Utils {
     }
 
     // Liquid things
+    private static int getScreenType(Context con) {
+        if (mDeviceType == -1) {
+            WindowManager wm = (WindowManager)con.getSystemService(Context.WINDOW_SERVICE);
+            android.view.Display display = wm.getDefaultDisplay();
+            int shortSize = Math.min(display.getRawHeight(), display.getRawWidth());
+            int shortSizeDp = shortSize * DisplayMetrics.DENSITY_DEFAULT / DisplayMetrics.DENSITY_DEVICE;
+            if (shortSizeDp < 600) {
+                // 0-599dp: "phone" UI with a separate status & navigation bar
+                mDeviceType =  DEVICE_PHONE;
+            } else if (shortSizeDp < 720) {
+                // 600-719dp: "phone" UI with modifications for larger screens
+                mDeviceType = DEVICE_HYBRID;
+            } else {
+                // 720dp: "tablet" UI with a single combined status & navigation bar
+                mDeviceType = DEVICE_TABLET;
+            }
+        }
+        return mDeviceType;
+    }
+
     public static boolean isPhone(Context con) {
         return getScreenType(con) == DEVICE_PHONE;
     }
