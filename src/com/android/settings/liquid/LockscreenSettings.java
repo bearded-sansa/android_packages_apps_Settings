@@ -106,7 +106,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mClockAlign = (ListPreference) findPreference(KEY_CLOCK_ALIGN);
         mClockAlign.setOnPreferenceChangeListener(this);
 
-        mIsScreenLarge = Utils.isTablet(getActivity());
+        mIsScreenLarge = Utils.isTabletLq(getActivity());
 
         updateCustomBackgroundSummary();
     }

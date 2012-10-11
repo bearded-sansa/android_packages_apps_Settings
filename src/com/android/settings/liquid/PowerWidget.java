@@ -113,7 +113,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 
             mTabletWidget = (PreferenceScreen) findPreference(PREF_TABLET_WIDGET);
 
-            if (!Utils.isTablet(getActivity())) {
+            if (!Utils.isTabletLq(getActivity())) {
                 if (mTabletWidget != null) {
                     getPreferenceScreen().removePreference(mTabletWidget);
                 }

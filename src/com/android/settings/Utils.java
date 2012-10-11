@@ -501,4 +501,19 @@ public class Utils {
         return ExtendedPropertiesUtils.mIsTablet;
     }
 
+    // Liquid things
+    public static boolean isPhone(Context con) {
+        return getScreenType(con) == DEVICE_PHONE;
+    }
+
+    public static boolean isHybrid(Context con) {
+        return getScreenType(con) == DEVICE_HYBRID;
+    }
+
+    public static boolean isTabletLq(Context con) {
+        return getScreenType(con) == DEVICE_TABLET;
+    }
+
+
+
 }
