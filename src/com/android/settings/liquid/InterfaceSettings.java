@@ -81,7 +81,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
     private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "persist.sys.nobootanimation";
     private static final String DISABLE_BOOTANIMATION_DEFAULT = "0";
     private static final String PREF_ALARM_ENABLE = "alarm";
-    private static final String PREF_MODE_TABLET_UI = "mode_tabletui";
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
 
     private static final int REQUEST_PICK_WALLPAPER = 201;
@@ -100,7 +99,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
     CheckBoxPreference mDisableBootanimPref;
     CheckBoxPreference mKillAppLongpressBack;
     CheckBoxPreference mAlarm;
-    CheckBoxPreference mTabletui;
     Preference mLcdDensity;
     CheckBoxPreference mUseAltResolver;
 
@@ -157,10 +155,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
         mAlarm.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_SHOW_ALARM, 1) == 1);
 
-        mTabletui = (CheckBoxPreference) findPreference(PREF_MODE_TABLET_UI);
-        mTabletui.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
-                    Settings.System.MODE_TABLET_UI, false));
-
         mUseAltResolver = (CheckBoxPreference) findPreference(PREF_USE_ALT_RESOLVER);
             mUseAltResolver.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
                     Settings.System.ACTIVITY_RESOLVER_USE_ALT, false));
@@ -177,10 +171,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
                     .removePreference(mKillAppLongpressBack);
         }
 
-        if (!mTablet) {
-            prefs.removePreference(mTabletui);
-        }
-
         mDisableBootanimPref = (CheckBoxPreference) getPreferenceScreen()
                 .findPreference(DISABLE_BOOTANIMATION_PREF);
         String disableBootanimation = SystemProperties.get
@@ -190,8 +180,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
         if (mTablet) {
             prefs.removePreference(mNotificationWallpaper);
             prefs.removePreference(mWallpaperAlpha);
-        } else {
-            prefs.removePreference(mTabletui);
         }
         
         setHasOptionsMenu(true);
@@ -236,11 +224,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_SHOW_ALARM, checked ? 1 : 0);
-        } else if (preference == mTabletui) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
-                    Settings.System.MODE_TABLET_UI,
-                    ((CheckBoxPreference) preference).isChecked());
-            return true;
         } else if (preference == mDisableBootanimPref) {
             SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP,
                                  mDisableBootanimPref.isChecked() ? "1" : "0");
