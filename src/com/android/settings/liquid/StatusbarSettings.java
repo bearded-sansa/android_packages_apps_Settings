@@ -210,6 +210,7 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
 
         if (Utils.isTablet()) {
  	    mPrefCategoryBatteryBar.removeAll();
+	    prefSet.removePreference(mPrefCategoryBatteryBar);
 	    mPrefCategoryClock.removePreference(mClockStyle);
   	    mPrefCategoryAdditional.removePreference(mStatusBarBrightnessControl);
         }
