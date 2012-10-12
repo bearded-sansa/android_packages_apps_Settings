@@ -55,7 +55,9 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
     private static final String PREF_WIFI_SIGNAL_STYLE = "wifi_signal_style";
     private static final String PREF_WIFI_SIGNAL_COLOR = "wifi_signal_color";
     private static final String PREF_HIDE_SIGNAL = "hide_signal";
+    private static final String STATUS_BAR_CATEGORY_BATTERYBAR = "battery_bar_cat";
     private static final String STATUS_BAR_CATEGORY_CLOCK = "clock_category";
+    private static final String STATUS_BAR_CATEGORY_ADDITIONAL = "additional_options";
 
     ListPreference mBatteryIcon;
     CheckBoxPreference mBatteryNotification;
@@ -78,7 +80,9 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
     CheckBoxPreference mStatusBarNotifCount;
     ListPreference mStatusbarTransparency;
    	
+    private PreferenceCategory mPrefCategoryBatteryBar;
     private PreferenceCategory mPrefCategoryClock;
+    private PreferenceCategory mPrefCategoryAdditional;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -196,12 +200,18 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
         mStatusBarNotifCount.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUS_BAR_NOTIF_COUNT,
                 0) == 1);
-
+	
+	// ps additions
+	// tablet checks
+	
+        mPrefCategoryBatteryBar = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_BATTERYBAR);
 	mPrefCategoryClock = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_CLOCK);
+        mPrefCategoryAdditional = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_ADDITIONAL);
 
         if (Utils.isTablet()) {
-            mPrefCategoryClock.removePreference(mStatusBarBrightnessControl);
+ 	    mPrefCategoryBatteryBar.removeAll();
 	    mPrefCategoryClock.removePreference(mClockStyle);
+  	    mPrefCategoryAdditional.removePreference(mStatusBarBrightnessControl);
         }
     }
 
