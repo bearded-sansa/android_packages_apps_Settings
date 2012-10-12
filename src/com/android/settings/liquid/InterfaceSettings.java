@@ -182,7 +182,7 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
 
 	mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);        
 
-	if (mTablet) {
+	if (Utils.isTablet()) {
             mPrefCategoryGeneral.removePreference(mNotificationWallpaper);
             mPrefCategoryGeneral.removePreference(mWallpaperAlpha);
         }
