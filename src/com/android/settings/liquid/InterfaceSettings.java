@@ -124,16 +124,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
 
         PreferenceScreen prefs = getPreferenceScreen();
 
-        mLcdDensity = findPreference("lcd_density_setup");
-        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
-        try {
-            newDensityValue = Integer.parseInt(currentProperty);
-        } catch (Exception e) {
-            getPreferenceScreen().removePreference(mLcdDensity);
-        }
-
-        mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
-
         customnavTemp = new File(getActivity().getFilesDir()+"notification_wallpaper.jpg");
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
