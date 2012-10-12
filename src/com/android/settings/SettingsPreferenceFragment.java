@@ -36,6 +36,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.android.settings.Utils;
+
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
