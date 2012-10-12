@@ -46,6 +46,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.PreferenceCategory;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Spannable;
@@ -82,6 +83,7 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
     private static final String DISABLE_BOOTANIMATION_DEFAULT = "0";
     private static final String PREF_ALARM_ENABLE = "alarm";
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
+    private static final String STATUS_BAR_CATEGORY_GENERAL = "general_options";
 
     private static final int REQUEST_PICK_WALLPAPER = 201;
     private static final int REQUEST_PICK_CUSTOM_ICON = 202;
@@ -99,8 +101,9 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
     CheckBoxPreference mDisableBootanimPref;
     CheckBoxPreference mKillAppLongpressBack;
     CheckBoxPreference mAlarm;
-    Preference mLcdDensity;
     CheckBoxPreference mUseAltResolver;
+
+    private PreferenceCategory mPrefCategoryGeneral;
 
     Random randomGenerator = new Random();
 
@@ -109,9 +112,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
     private int seekbarProgress;
     String mCustomLabelText = null;
 
-    int newDensityValue;
-
-    DensityChanger densityFragment;
     Configuration mCurConfig = new Configuration();
 
     @Override
@@ -177,9 +177,14 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
                 (DISABLE_BOOTANIMATION_PERSIST_PROP, DISABLE_BOOTANIMATION_DEFAULT);
         mDisableBootanimPref.setChecked("1".equals(disableBootanimation));
 
-        if (mTablet) {
-            prefs.removePreference(mNotificationWallpaper);
-            prefs.removePreference(mWallpaperAlpha);
+	// ps additions
+	// tablet checks
+
+	mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);        
+
+	if (mTablet) {
+            mPrefCategoryGeneral.removePreference(mNotificationWallpaper);
+            mPrefCategoryGeneral.removePreference(mWallpaperAlpha);
         }
         
         setHasOptionsMenu(true);
@@ -336,10 +341,6 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements Pre
             });
 
             alert.show();
-        } else if (preference == mLcdDensity) {
-            ((PreferenceActivity) getActivity())
-            .startPreferenceFragment(new DensityChanger(), true);
-            return true;
         } else if (preference == mUseAltResolver) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.ACTIVITY_RESOLVER_USE_ALT,
