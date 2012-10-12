@@ -191,8 +191,9 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_NOTIF_COUNT,
                 0) == 1);
 
-        if (mTablet) {
+        if (Utils.isTablet()) {
             getPreferenceScreen().removePreference(mStatusBarBrightnessControl);
+	    getPreferenceScreen().removePreference(mClockStyle);
         }
     }
 
