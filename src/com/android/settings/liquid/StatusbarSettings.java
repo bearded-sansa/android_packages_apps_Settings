@@ -76,6 +76,8 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
     CheckBoxPreference mStatusBarBrightnessControl;
     CheckBoxPreference mStatusBarNotifCount;
     ListPreference mStatusbarTransparency;
+   	
+    private PreferenceCategory mPrefCategoryClock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
