@@ -54,6 +54,7 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
     private static final String PREF_WIFI_SIGNAL_STYLE = "wifi_signal_style";
     private static final String PREF_WIFI_SIGNAL_COLOR = "wifi_signal_color";
     private static final String PREF_HIDE_SIGNAL = "hide_signal";
+    private static final String STATUS_BAR_CATEGORY_CLOCK = "clock_category";
 
     ListPreference mBatteryIcon;
     CheckBoxPreference mBatteryNotification;
@@ -82,6 +83,8 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.statusbar_settings);
+
+	PreferenceScreen prefSet = getPreferenceScreen();
 
         mBatteryIcon = (ListPreference) findPreference(PREF_BATT_ICON);
         mBatteryIcon.setOnPreferenceChangeListener(this);
@@ -191,9 +194,11 @@ public class StatusbarSettings extends SettingsPreferenceFragment implements
                 .getContentResolver(), Settings.System.STATUS_BAR_NOTIF_COUNT,
                 0) == 1);
 
+	mPrefCategoryClock = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_CLOCK);
+
         if (Utils.isTablet()) {
-            getPreferenceScreen().removePreference(mStatusBarBrightnessControl);
-	    getPreferenceScreen().removePreference(mClockStyle);
+            mPrefCategoryClock.removePreference(mStatusBarBrightnessControl);
+	    mPrefCategoryClock.removePreference(mClockStyle);
         }
     }
 
